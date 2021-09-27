@@ -1,105 +1,111 @@
-- var days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
-- var dates = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30];
-- var tags = ['Meeting', 'Design', 'Free time', 'Travel'];
-- var octoberDates = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-mixin task(icon, task, time, number)
-	.task(class=`task-${number}`)
-		.icon
-			i(class=`${icon}`)
-		.details
-			h2= task
-			span.span= time
-mixin participant(icon, name, x)
-	.participant
-		.user(class=`${name}`)
-		img(src=`${icon}`)
-		h3= name
-		i.fal.fa-times
-
+doctype html
+head
+	title  Task Management App UI
+	link(href='style.scss' rel='stylesheet')
+	link(href='https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,600,700,800,900' rel='stylesheet')
 body
-	label.switch
-		input(type="checkbox", onchange="darkLightToggle()")
-		span.slider
-	.app-1
-		header
-			i.fas.fa-stream
-			i.fal.fa-search
-		.calendar
-			.cal-nav
-				.month
-					h1 September 2021
-				.icon.a
-					i.far.fa-chevron-left
-				.icon
-					i.far.fa-chevron-right
-			.cal-days
-				each day in days
-					h2= day
-			.cal-dates
-				h5.light 30
-				h1.light 31
-				each date in dates
-					h5.day= date
-				each odate in octoberDates
-					h5.light= odate
-		.manager
-			.schedule
-				h1 Schedule
-				+task('far fa-comment-dots', 'Meeting Team', '9:00', 1)
-				+task('fas fa-balance-scale', 'Landing Page - Project 1', '10:00 - 12:30', 2)
-				+task('fas fa-mug-hot', 'Lunch with Emma', '13:30', 3)
-				+task('far fa-comment', 'Prepare Presentation', '15:00 to 16:00', 4)
+	- var days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+	- var dates = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30];
+	- var tags = ['Meeting', 'Design', 'Free time', 'Travel'];
+	- var octoberDates = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+	mixin task(icon, task, time, number)
+		.task(class=`task-${number}`)
+			.icon
+				i(class=`${icon}`)
+			.details
+				h2= task
+				span.span= time
+	mixin participant(icon, name, x)
+		.participant
+			.user(class=`${name}`)
+			img(src=`${icon}`)
+			h3= name
+			i.fal.fa-times
 
-				nav.nav
-					ul.nav-ul
-						li 
-							i.fal.fa-calendar-alt
-						li.light
-							i.far.fa-check-square
-						li.light 
-							i.fal.fa-chart-pie-alt
-						li.light 
-							i.far.fa-user
-			button
-				i.fal.fa-plus
-	.app-2
-		header
-			i.far.fa-chevron-left
-			i.fas.fa-ellipsis-v
-		.new-task
-			h1 Create New Task
-			.tags
-				ul
-					each tag in tags
-						li= tag
-			.hi
-				form.task-create
-					input.task-title(type="text", placeholder="Task Title")
-				form.task-create
-					input.task-descrption(type="text", placeholder="Add a description...")
-			.time
-				form.time-1 
-					label.time(for="starttime") Start Time
-					input(
-						type="text",
-						name="starttime",
-						placeholder="🗓️ 16 September,10:00am"
-					)
-				form.time-2
-					label(for="endtime") End Time
-					input(type="text", name="endtime", placeholder="🗓️ 16 September,11:30am")
-			.particpants-list
-				button.new-participant
+	body
+		label.switch
+			input(type="checkbox", onchange="darkLightToggle()")
+			span.slider
+		.app-1
+			header
+				i.fas.fa-stream
+				i.fal.fa-search
+			.calendar
+				.cal-nav
+					.month
+						h1 September 2021
+					.icon.a
+						i.far.fa-chevron-left
+					.icon
+						i.far.fa-chevron-right
+				.cal-days
+					each day in days
+						h2= day
+				.cal-dates
+					h5.light 30
+					h1.light 31
+					each date in dates
+						h5.day= date
+					each odate in octoberDates
+						h5.light= odate
+			.manager
+				.schedule
+					h1 Schedule
+					+task('far fa-comment-dots', 'Meeting Team', '9:00', 1)
+					+task('fas fa-balance-scale', 'Landing Page - Project 1', '10:00 - 12:30', 2)
+					+task('fas fa-mug-hot', 'Lunch with Emma', '13:30', 3)
+					+task('far fa-comment', 'Prepare Presentation', '15:00 to 16:00', 4)
+
+					nav.nav
+						ul.nav-ul
+							li 
+								i.fal.fa-calendar-alt
+							li.light
+								i.far.fa-check-square
+							li.light 
+								i.fal.fa-chart-pie-alt
+							li.light 
+								i.far.fa-user
+				button
 					i.fal.fa-plus
-				+participant('https://lh4.googleusercontent.com/-eIC_BUPtnHk/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3revthQE0ujsZtDnQo2yUPdyWxSb3w/w205-h130-cphoto.jpg64', 'Emma', 'times')
-				+participant('https://lh5.googleusercontent.com/-B_F39HwRx-Q/AAAAAAAAAAI/AAAAAAAAAAA/AAKWJJNMJhkb6hoD0k08i4Y7dHiKkNYLDg/c/photo.jpg?type=square', 'John', 'times')
-			form.location
-				label(for="loc") Location
-				input(type="text", name="loc", placeholder="Select a location...")
-			form.toggle
-				label.label(for="alert") 
-					b Get alert for this task
-				label.toggle-switch
-					input.alert-toggle(type="checkbox", name="alert", checked)
-					span.toggle-slider
-			button.create Create Task
+		.app-2
+			header
+				i.far.fa-chevron-left
+				i.fas.fa-ellipsis-v
+			.new-task
+				h1 Create New Task
+				.tags
+					ul
+						each tag in tags
+							li= tag
+				.hi
+					form.task-create
+						input.task-title(type="text", placeholder="Task Title")
+					form.task-create
+						input.task-descrption(type="text", placeholder="Add a description...")
+				.time
+					form.time-1 
+						label.time(for="starttime") Start Time
+						input(
+							type="text",
+							name="starttime",
+							placeholder="🗓️ 16 September,10:00am"
+						)
+					form.time-2
+						label(for="endtime") End Time
+						input(type="text", name="endtime", placeholder="🗓️ 16 September,11:30am")
+				.particpants-list
+					button.new-participant
+						i.fal.fa-plus
+					+participant('https://lh4.googleusercontent.com/-eIC_BUPtnHk/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3revthQE0ujsZtDnQo2yUPdyWxSb3w/w205-h130-cphoto.jpg64', 'Emma', 'times')
+					+participant('https://lh5.googleusercontent.com/-B_F39HwRx-Q/AAAAAAAAAAI/AAAAAAAAAAA/AAKWJJNMJhkb6hoD0k08i4Y7dHiKkNYLDg/c/photo.jpg?type=square', 'John', 'times')
+				form.location
+					label(for="loc") Location
+					input(type="text", name="loc", placeholder="Select a location...")
+				form.toggle
+					label.label(for="alert") 
+						b Get alert for this task
+					label.toggle-switch
+						input.alert-toggle(type="checkbox", name="alert", checked)
+						span.toggle-slider
+				button.create Create Task
